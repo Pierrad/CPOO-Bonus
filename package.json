@@ -1,0 +1,16 @@
+{
+  "name": "bonus",
+  "version": "1.0.0",
+  "description": "Exercice bonus du TD0 fait de manière récursive.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Bouzakri Wassim & Vasseur Pierre-Adrien",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.3.1"
+  }
+}
