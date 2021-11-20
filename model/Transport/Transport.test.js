@@ -1,6 +1,11 @@
 const Transport = require('./Transport');
 
-const transport = new Transport('12345', '32', 'Pas de règle', 'Paris', 'Marseille');
+const transport = new Transport('12345', '32', 'Pas de règle.', 'Paris', 'Marseille');
+
+// Test function toString
+test('toString => ', () => {
+  expect(transport.toString()).toBe('Trajet n°12345 de Paris à Marseille. Place 32. Pas de règle.');
+})
 
 // Test all setters with getters (not really needed, but good to have)
 

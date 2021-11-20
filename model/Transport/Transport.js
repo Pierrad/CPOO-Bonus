@@ -47,6 +47,10 @@ class Transport {
     this.end = end;
   }
 
+  toString() {
+    return `Trajet n°${this.number} de ${this.begin} à ${this.end}. Place ${this.seat}. ${this.rule}`;
+  }
+
 }
 
 module.exports = Transport;

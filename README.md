@@ -18,6 +18,15 @@ Par exemple, l'API devrait être capable de prendre un ensemble non ordonné de 
 
 La liste doit être définie dans un format compatible avec le format d'entrée. 
 
+## Conception
+
+### Modèle
+
+- Classe parente ```Transport``` 
+- Classes enfants ```Bus``` & ```Plane``` & ```Train```
+- Hésitation à faire de la classe ```Transport``` une classe abstraite mais normalement, on ne peut pas instancier une classe abstraite donc comment faire les tests ?
+- Pas d'interface car pas de méthodes particulières à part ```toString```
+
 ## Requis
 
 - Git
