@@ -1,6 +1,3 @@
-/**
- @abstract
- */
 class Transport {
   constructor(number, seat, rule, begin, end) {
     this.number = number;
