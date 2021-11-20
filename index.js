@@ -1,4 +1,8 @@
-const mock = require('./mock')
+const mock = require('./mock');
+const Bus = require('./model/Transport/Bus/Bus');
+const Train = require('./model/Transport/Train/Train');
+const Plane = require('./model/Transport/Plane/Plane');
+
 
 // Generate a random number from a given seed
 function random(seed) {
@@ -20,11 +24,11 @@ function shuffle(array, seed) {
 
 // Function to stringify an object
 function toStringObject(object) {
-  let string = ''
+  let string = '';
   Object.keys(object).forEach((key) => {
-    string += key + ': ' + object[key]
+    string += key + ': ' + object[key];
     if (Object.keys(object).indexOf(key) !== Object.keys(object).length - 1) {
-      string += ',\n'
+      string += ',\n';
     }
   })
   return string
@@ -33,42 +37,40 @@ function toStringObject(object) {
 // Function to find the beginning of a trip in an array of trips
 function findBeginInArray(array) {
   const begin = array.find((item) => {
-    const listOfEnding = array.map((item) => item.end)
+    const listOfEnding = array.map((item) => item.end);
     if (!listOfEnding.includes(item.begin)) {
-      return item
+      return item;
     }
   })
-  return begin
+  return begin;
 }
 
 // Function to create the journey description recursively
 function createJourneyRecursively(array, string) {
-  const begin = findBeginInArray(array)
+  const begin = findBeginInArray(array);
   if (begin) {
-    const newArray = array.filter((item) => item.begin !== begin.begin)
-    let currentJourney = 'Aller de ' + begin.begin + ' à ' + begin.end + ' en ' + begin.type + '.'
-    if (begin.number) {
-      currentJourney += " Votre numéro de réservation est : " + begin.number + '.'
-    }
-    if (begin.gate) {
-      currentJourney += " Votre porte est la numéro " + begin.gate + '.'
-    }
-    if (begin.seat) {
-      currentJourney += " Votre siège est le " + begin.seat + '.'
-    }
-    if (begin.rule) {
-      currentJourney += " " + begin.rule
-    }
-    const newString = string + currentJourney + '\n'
+    let vehicle = null;
 
-    return createJourneyRecursively(newArray, newString)
+    if (begin.type === 'bus') {
+      vehicle = new Bus(begin.number, begin.seat, begin.rule, begin.begin, begin.end);
+    } else if (begin.type === 'train') {
+      vehicle = new Train(begin.number, begin.seat, begin.rule, begin.begin, begin.end);
+    } else if (begin.type === 'avion') {
+      vehicle = new Plane(begin.number, begin.seat, begin.rule, begin.begin, begin.end, begin.gate);
+    }
+
+    // Make sure the vehicle is not null
+    const newString = vehicle ? string + vehicle.toString() + '\n' : '';
+
+    const newArray = array.filter((item) => item.begin !== begin.begin);
+    return createJourneyRecursively(newArray, newString);
   }
-  return string + 'Vous êtes arrivé à votre destination finale.'
+  return string + 'Vous êtes arrivé à votre destination finale.';
 }
 
-console.log('-- Votre trajet est le suivant --\n')
-console.log(createJourneyRecursively(shuffle(mock.mock, Math.random()), ''))
-console.log('\n----------------------------------')
+console.log('-- Votre trajet est le suivant --\n');
+console.log(createJourneyRecursively(shuffle(mock.mock, Math.random()), ''));
+console.log('\n----------------------------------');
 
 module.exports = {
   createJourneyRecursively: createJourneyRecursively,

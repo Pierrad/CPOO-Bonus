@@ -10,7 +10,7 @@ module.exports.mock = [
   },
   {
     begin: "Barcelone",
-    end: "Gérone",
+    end: "l'aéroport de Gérone",
     type: "bus",
     number: null,
     gate: null,
@@ -18,7 +18,7 @@ module.exports.mock = [
     rule: null,
   },
   {
-    begin: "Gérone",
+    begin: "l'aéroport de Gérone",
     end: "Stockholm",
     type: "avion",
     number: "SK455",
@@ -33,6 +33,6 @@ module.exports.mock = [
     number: "SK22",
     gate: "22",
     seat: "7B",
-    rule: "Transfert automatique des bagages",
+    rule: "Les bagages seront automatiquement transférés de votre dernière étape.",
   }
 ]
